@@ -1,3 +1,10 @@
+1. CD 'mention working folder path'
+2. Git clone https://github.com/ayyappangit/Assistant.git
+3. 
+
+
+
+
 # FrontEnd
 # where my root folder?
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
