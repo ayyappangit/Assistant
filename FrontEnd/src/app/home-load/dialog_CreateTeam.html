@@ -1,0 +1,8 @@
+<h4 mat-dialog-title style="text-align: center; color: grey;">Add New Team</h4>
+<mat-form-field>
+    <input matInput placeholder="Team Name" [(ngModel)]="data.ct_TeamName" required maxlength="20" cdkFocusInitial>
+</mat-form-field>
+<div mat-dialog-actions>
+    <button mat-stroked-button color="primary" mat-button (click)="onNoClick()">Close</button>
+    <button mat-stroked-button color="primary" mat-button [mat-dialog-close]="data.ct_TeamName">Add Team</button>
+</div>

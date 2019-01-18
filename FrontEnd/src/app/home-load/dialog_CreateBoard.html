@@ -1,0 +1,9 @@
+<h4 mat-dialog-title style="text-align: center; color: grey;">Add new board for <b>{{ data.cb_TeamName }}</b></h4>
+<mat-form-field>
+    <input matInput placeholder="Board Name" [(ngModel)]="data.cb_BoardName" required maxlength="20" cdkFocusInitial>
+</mat-form-field>
+<div mat-dialog-actions style="vertical-align: center; width:100%">
+    <button mat-stroked-button color="primary" mat-button (click)="onNoClick()">Close</button>
+    <button mat-stroked-button color="primary" mat-button [mat-dialog-close]="data.cb_BoardName">Add
+        Board</button>
+</div>

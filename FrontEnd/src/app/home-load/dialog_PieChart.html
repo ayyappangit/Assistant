@@ -1,0 +1,40 @@
+<div class="container" style="width:100%">
+  <div class="">
+    <h2 class="text-center">Severity Chart</h2>
+    <mat-tab-group>
+      <mat-tab label="Pie Chart">
+        <canvas
+          baseChart
+          [data]="data.chartData"
+          [labels]="data.chartLabels"
+          [chartType]="data.chart_Type_Pie"
+          [options]="data.chart_Options"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"
+        ></canvas>
+      </mat-tab>
+      <mat-tab label="Polar Area">
+        <canvas
+          baseChart
+          [data]="data.chartData"
+          [labels]="data.chartLabels"
+          [chartType]="data.chart_Type_Polar"
+          [options]="data.chart_Options"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"
+        ></canvas>
+      </mat-tab>
+      <mat-tab label="Doughnut Chart">
+        <canvas
+          baseChart
+          [data]="data.chartData"
+          [labels]="data.chartLabels"
+          [chartType]="data.chart_Type_Doughnut"
+          [options]="data.chart_Options"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"
+        ></canvas>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

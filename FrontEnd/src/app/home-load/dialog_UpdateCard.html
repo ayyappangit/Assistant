@@ -1,0 +1,20 @@
+<h4 mat-dialog-title style="text-align: center; color: grey;">Update the Card</h4>
+<mat-form-field>
+    <input type="text" matInput placeholder="Title" style=" width: 100%;" [(ngModel)]="data.cu_Title" required
+        maxlength="200" cdkFocusInitial>
+</mat-form-field>
+<mat-form-field>
+    <input matInput placeholder="Details" style=" width: 100%;" [(ngModel)]="data.cu_Details ">
+</mat-form-field>
+<mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Due date" ngModel name="duedata" id="duedata" #title="ngModel">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+    <input type="number" matInput placeholder="Sequence" style=" width: 100%;" [(ngModel)]="data.cu_Sequence">
+</mat-form-field>
+<div mat-dialog-actions>
+    <button mat-stroked-button color="primary" mat-button (click)="onNoClick()">Close</button>
+    <button mat-stroked-button color="primary" mat-button [mat-dialog-close]="data">Update Card</button>
+</div>

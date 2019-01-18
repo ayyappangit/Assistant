@@ -1,0 +1,123 @@
+.bluetext {
+  color: #3c5a99;
+}
+
+.goldbg {
+  /* background-color: #ff851b; */
+  /* background-image: linear-gradient(white, red); */
+  background-image: linear-gradient(to bottom right, #b10000, #ff3d3d);
+  /* background-image: linear-gradient(to botton right, red, white); */
+}
+
+.boderrightdanger {
+  border-right: solid 5px red;
+}
+
+.boderrightsuccess {
+  border-right: solid 5px green;
+}
+
+.blacktext {
+  color: black;
+}
+
+.cardbg {
+  background-image: linear-gradient(to top right, #fffefe, #ffff88);
+}
+
+.menu {
+  border-right: solid 1px black;
+  font-size: 14px;
+  font-family: "Segoe UI";
+  font-weight: 500;
+}
+
+.topnavBoard {
+  margin-top: -39px;
+  margin-left: 175px;
+  flex-direction: row;
+}
+
+/* Start: Page Container */
+.left {
+  margin-top: 0px;
+  float: left;
+}
+
+.right {
+  margin-top: 10px;
+  vertical-align: center;
+  /* border: solid 2px hsl(219, 89%, 33%); */
+  margin: 3px 3px 3px 3px;
+  border-radius: 4px;
+  padding: 3px 3px 3px 3px;
+  width: 308px;
+}
+
+/* Start: Todo Header */
+.todo-container {
+  width: 306px;
+  max-width: 306px;
+  margin: 0 2px 1px 2px;
+  display: inline-block;
+  vertical-align: top;
+  height: auto;
+}
+
+/* Start: Todo list Container */
+.todo-list {
+  border: solid 1px #b3b3b3;
+  min-height: 60px;
+  background-color: ghostwhite;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+}
+
+/* Start: Todo box - Box */
+.todo-box {
+  padding: 2px 2px 0px 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 14px;
+  width: 100%;
+  margin-bottom: -2px;
+}
+
+.ecbManu {
+  position: absolute;
+  overflow: visible;
+  display: inline-block;
+  color: rgb(224, 154, 3);
+  margin-left: 3px;
+}
+
+/* Start: Todo Create Form */
+label {
+  font-family: Verdana;
+  font-size: 10px;
+}
+
+h3 {
+  margin-top: 2px;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+  font-size: 15px;
+  background-color: grey;
+  font-weight: bold;
+  letter-spacing: 0.5mm;
+}
+
+@media only screen and (max-width: 400px) {
+  #currUser {
+    display: none;
+  }
+}
+
+/* END */

@@ -1,0 +1,12 @@
+<h4 mat-dialog-title style="text-align: center; color: grey;">Add user to Team : {{data.au_TeamName}}</h4>
+<mat-form-field>
+    <input matInput placeholder="User Name" [(ngModel)]="data.au_UserName" required maxlength="20" cdkFocusInitial>
+</mat-form-field>
+<mat-form-field>
+    <input matInput placeholder="User Email" [(ngModel)]="data.au_Email" required maxlength="20">
+</mat-form-field>
+<div mat-dialog-actions>
+    <button mat-stroked-button color="primary" mat-button (click)="onNoClick()">Close</button>
+    <button mat-stroked-button color="primary" mat-button [mat-dialog-close]="data" [mat-dialog-close]="data.au_UserName">Share
+        Board</button>
+</div>

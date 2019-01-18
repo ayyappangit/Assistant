@@ -1,0 +1,117 @@
+<div class="main">
+  <input type="hidden" id="hcurrentTeamID" />
+  <input type="hidden" id="hcurrentBoardID" />
+  <input type="hidden" id="hcurrentListID" />
+  <div class="headerGroup">
+    <div class="btn-group mr-3">
+      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button class="btn btn-outline-blue blacktext goldbg" ngbDropdownToggle style="width: 175px; border: 0px; border-radius: 0px; text-align:right; font-size: 11px; height: 39px;font-weight: bold;">
+          <fa-icon class="fas fa-tasks" size="lg" [spin]="true" [icon]="faGlobe" pull="left"></fa-icon>
+          {{ g_CurrentTeamName }}
+        </button>
+        <div class="dropdown-menu goldbg" ngbDropdownMenu>
+          <button class="dropdown-item goldbg" *ngFor="let item of getTeamsNav" attr.id="T{{ item.TeamID }}" (click)="event_onTeamChange($event)">
+            {{ item.TeamName }}
+          </button>
+          <div></div>
+          <button class="dropdown-item goldbg" id="addTeam" (click)="click_openDialogCreateTeam()" style="text-align: left;">
+            Add Team <fa-icon class="fas fa-plus " size="lg" [icon]="faPlus" pull="right"></fa-icon>
+          </button>
+        </div>
+      </div>
+      <!-- Future Use drop down Board
+      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown" style="margin-left:156px; margin-top:-15px;">
+        <button class="btn btn-outline-warning" ngbDropdownToggle>
+          Select Board
+        </button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="dropdown-item" *ngFor="let item of getBoardsNav" attr.id="B{{item.BoardID}}" (click)="onBoardChange($event)">
+            {{ item.BoardName }}
+          </button>
+        </div>
+      </div> -->
+    </div>
+    <div id="topnavBoardID" class="topnavBoard">
+      <nav class="navbar navbar-expand-lg navbar-light goldbg" style=" height: 39px; padding-left: 0px;">
+        <button class="navbar-toggler navbar-dark goldbg" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-top: -8px; margin-left: 0px; height:39px;">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse goldbg navbar-light" id="navbarNav" style="text-align: left; padding-left: 5px; z-index: 100">
+          <ul class="navbar-nav goldbg" *ngFor="let item of getBoardsNav">
+            <li id="LI{{ item.BoardID }}" class="nav-item">
+              <a attr.id="B{{ item.BoardID }}" (click)="event_onBoardChange($event)" class="nav-link menu " href="#"
+                style="font-weight: bold;">{{ item.BoardName }}
+              </a>
+            </li>
+          </ul>
+          <div style="float: right;">
+            <a ref="#" (click)="click_openDialogCreateBoard()">
+              <fa-icon class="fas fa-plus " size="lg" [icon]="faPlus" pull="right"></fa-icon>
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div style="
+                  font-style: italic; float:right; margin-top: -29px; position:relative; font-size: 12px;font-weight:
+                  bold;z-index: 100; margin-right:5px;">
+        <a ref="#" (click)="click_openDialogDialogChart()">
+          <fa-icon class="fa fa-chart-pie" size="lg" [icon]="faChartPie" pull="left"></fa-icon>
+        </a>
+        <a ref="#" (click)="click_openDialogAddUserToTeam()">
+          <fa-icon class="fa fa-user-plus" size="lg" [icon]="faUserPlus" pull="left"></fa-icon>
+        </a>
+        <span id="currUser" title="{{ g_currUserEmail }}">{{
+          g_currUserName
+          }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="left">
+    <div *ngFor="let list of getUniqueCards" class="todo-container">
+      <h3>{{ list.ListName }}</h3>
+      <div (dragover)="allowDrop($event)" (drop)="drop($event, list.ListID)" class="todo-list">
+        <div id="L{{ list.ListID }}" class="todo-box" *ngFor="let card of event_getAllCardNew(list.ListID)">
+          <div id="C{{ card.CardID }}" class="card boderright{{ card.Severity }} mb-1" style="width: 306px; margin: 2px 2px 2px 2px;"
+            draggable="true" (dragstart)="drag($event)">
+            <div class="card-header cardbg" style="font-size: 12px; font-family: Geneva, Tahoma, sans-serif; height:100%;padding-top: 4px;  padding-right: 1px; min-height: 40px;">
+              {{ card.Title }}
+            </div>
+          </div>
+          <div class="ecbManu">
+            <fa-icon class="dropbtn fa-2x" [icon]="faEllipsisV" [matMenuTriggerFor]="ecb"></fa-icon>
+
+            <mat-menu #ecb="matMenu">
+              <button attr.id="UpdateID{{ card.CardID }}" mat-menu-item (click)="event_UpdateCard($event)">
+                Details...
+              </button>
+              <button mat-menu-item [matMenuTriggerFor]="vertebrates">
+                Severity
+              </button>
+              <button attr.id="DeleteID{{ card.CardID }}" mat-menu-item (click)="event_deleteCard($event)">
+                Delete
+              </button>
+            </mat-menu>
+            <mat-menu #vertebrates="matMenu">
+              <button attr.id="ColorID{{ card.CardID }}" title="Red" mat-menu-item (click)="event_changeCardSeverity($event)">
+                Red
+              </button>
+              <button attr.id="ColorID{{ card.CardID }}" title="Green" mat-menu-item (click)="event_changeCardSeverity($event)">
+                Green
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="float:left; margin-left: -3px;">
+    <a ref="#" (click)="click_openDialogCreateList()">
+      <fa-icon class="fas fa-plus " size="lg" [icon]="faPlus" pull="right"></fa-icon>
+    </a>
+  </div>
+  <div id="divCreateList" style="float:left;margin-top:-12px;" class="hideItem"></div>
+  <div class="right">
+    <add-card (cardCreated)="onCardCreated($event)"></add-card>
+  </div>
+</div>
