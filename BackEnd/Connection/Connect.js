@@ -1,24 +1,24 @@
 const sql = require("mssql");
 
 const connect = function () {
-  // console.log("Azure DB Connected");
-  // const conn = new sql.ConnectionPool({
-  //   user: "Assistant",
-  //   password: "Password1",
-  //   server: "eyazuresqlserver.database.windows.net",
-  //   database: "Assistant",
-  //   port: 1433,
-  //   encrypt: true
-  // });
-
-  console.log("Ayyappan Local DB Connected");
+  console.log("Azure DB Connected");
   const conn = new sql.ConnectionPool({
-    user: "sa",
-    password: "sa",
-    server: "US1153935W1",
+    user: "Assistant",
+    password: "Password1",
+    server: "eyazuresqlserver.database.windows.net",
     database: "Assistant",
-    port: 1433
+    port: 1433,
+    encrypt: true
   });
+
+  // console.log("Ayyappan Local DB Connected");
+  // const conn = new sql.ConnectionPool({
+  //   user: "sa",
+  //   password: "sa",
+  //   server: "US1153935W1",
+  //   database: "Assistant",
+  //   port: 1433
+  // });
 
   // console.log("Prince Local DB Connected");
   // console.log("Azure DB Connected");
