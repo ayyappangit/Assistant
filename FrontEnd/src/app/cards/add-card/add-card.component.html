@@ -1,7 +1,7 @@
 <form #formCreateCard="ngForm" (ngSubmit)="onCreateCard(formCreateCard)">
   <div class="form-group">
     <div class="col-sm-20">
-      <textarea required ngModel name="title" id="title" #title="ngModel" cols="100" rows="2" placeholder="Todo What?"
+      <textarea required ngModel name="title" id="title" #title="ngModel" cols="100" rows="2" placeholder="Enter the card title."
         class="form-control" maxlength="199"></textarea>
       <div *ngIf="title.touched && title.invalid" class="alert alert-danger">
         Title is required
