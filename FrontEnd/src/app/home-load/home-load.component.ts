@@ -78,7 +78,7 @@ export class HomeLoadComponent implements OnInit {
   getUserInfo: any;
   g_currUserName: any;
   g_currUserEmail: any;
-  rootURL = "http://localhost:3000/assistant/";
+  rootURL = "https://infiniteassistantnode.azurewebsites.net/assistant/";
 
   faEllipsisV = faEllipsisV;
   faGlobe = faGlobe;
