@@ -256,7 +256,7 @@ export class HomeLoadComponent implements OnInit {
           });
         }
         if (!map.has(item.DueDate)) {
-          item.DueDate = item.DueDate.substring(0, 10);
+          item.DueDate = new Date(item.DueDate.substring(0, 10));
         }
       }
       if (this.getUniqueCards.length !== 0) {
@@ -275,6 +275,15 @@ export class HomeLoadComponent implements OnInit {
     return this.getListsCardsdata.filter(
       cards => cards.ListID === listId && cards.Active === true
     );
+  }
+
+  event_GetDueDateCSS(duedate: Date) {
+    let css = 'Green';
+    var todayDate = new Date();
+    if (duedate < todayDate) {
+      css = 'Red';
+    }
+    return css;
   }
 
   //#endregion

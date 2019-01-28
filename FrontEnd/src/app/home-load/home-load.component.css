@@ -95,13 +95,12 @@
   overflow: hidden;
 }
 
-#circle {
-  width: 20px;
-  height: 20px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius: 25px;
-  border-radius: 50%;
-  background-color: #3c5a99;
+.dueDateColorRed {
+  color: red;
+}
+
+.dueDateColorGreen {
+  color: green;
 }
 
 .ecbManu {

@@ -65,7 +65,7 @@
             <fa-icon class="fa fa-user-plus" size="lg" [icon]="faUserPlus" pull="left"></fa-icon>
           </a>
         </div>
-        <div style="float:left;width: 100px; font-size: 9.5px;">
+        <div style="float:left;width: 100px; font-size: 9px;">
           <span id="currUser" title="{{ g_currUserEmail }}">{{
             g_currUserName
             }}</span>
@@ -84,8 +84,10 @@
               {{ card.Title }}
               <hr style="margin: 2px;">
               <div style="height:20px; margin:-2px;">
-                <div style="font-size: 12px; font-family:Tahoma, Geneva, Verdana, sans-serif; float:left; margin-left: 6px; margin-top: 8px; font-style: italic; font-weight: bold; ">{{card.DueDate
+                <div class="dueDateColor{{event_GetDueDateCSS(card.DueDate, card.CardID)}}" style="font-size: 11px; font-family:Tahoma, Geneva, Verdana, sans-serif; float:left; margin-left: 6px; margin-top: 8px; font-style: italic; font-weight: bold; ">{{card.DueDate
+                  | date:'MM/dd/yyyy'
                   }} </div>
+
                 <div class="ecbManu">
                   <fa-icon class="dropbtn fa-2x" [icon]="faEllipsisH" [matMenuTriggerFor]="ecb"></fa-icon>
                   <mat-menu #ecb="matMenu">
