@@ -256,7 +256,8 @@ export class HomeLoadComponent implements OnInit {
           });
         }
         if (!map.has(item.DueDate)) {
-          item.DueDate = new Date(item.DueDate.substring(0, 10));
+          if (item.DueDate != null)
+            item.DueDate = new Date(item.DueDate.substring(0, 10));
         }
       }
       if (this.getUniqueCards.length !== 0) {

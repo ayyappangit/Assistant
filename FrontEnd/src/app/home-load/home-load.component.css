@@ -26,7 +26,7 @@
 }
 
 .menu {
-  border-right: solid 1px black;
+  --border-right: solid 1px black;
   font-size: 14px;
   font-family: "Segoe UI";
   font-weight: 500;
