@@ -82,8 +82,7 @@ export class HomeLoadComponent implements OnInit {
   getUserInfo: any;
   g_currUserName: any;
   g_currUserEmail: any;
-  rootURL = "";// "http://localhost:3000/assistant/"; //"https://infiniteassistantnode.azurewebsites.net/assistant/"; // 
-
+  rootURL = "https://infiniteassistantnode.azurewebsites.net/assistant/";
   faEllipsisV = faEllipsisV;
   faEllipsisH = faEllipsisH;
   faGlobe = faGlobe;
@@ -177,7 +176,7 @@ export class HomeLoadComponent implements OnInit {
     //if (window.location.origin.toString().indexOf('localhost') >= 0)
     //this.rootURL = "http://localhost:3000/assistant/";
     //else if (window.location.origin.toString().indexOf('infiniteassistantnode') >= 0)
-    this.rootURL = "https://infiniteassistantnode.azurewebsites.net/assistant/";
+    //this.rootURL = "https://infiniteassistantnode.azurewebsites.net/assistant/";
     this.getUser();
   }
 
