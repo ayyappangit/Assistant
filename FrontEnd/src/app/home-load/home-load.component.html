@@ -40,8 +40,8 @@
         <div class="collapse navbar-collapse goldbg navbar-light" id="navbarNav" style="text-align: left; padding-left: 5px; z-index: 100">
           <ul class="navbar-nav goldbg" *ngFor="let item of getBoardsNav">
             <li id="LI{{ item.BoardID }}" class="nav-item">
-              <a attr.id="B{{ item.BoardID }}" (click)="event_onBoardChange($event)" class="nav-link menu " href="#"
-                style="font-weight: bold;">{{ item.BoardName }}
+              <a attr.id="B{{ item.BoardID }}" (click)="event_onBoardChange($event)" class="nav-link menu minwidth"
+                href="#" style="font-weight: bold;">{{ item.BoardName }}
               </a>
             </li>
           </ul>
@@ -74,13 +74,41 @@
         <div id="L{{ list.ListID }}" class="todo-box" *ngFor="let card of event_getAllCardNew(list.ListID)">
           <div id="C{{ card.CardID }}" class="card boderright{{ card.Severity }} mb-1" style="width: 306px; margin: 2px 2px 2px 2px;"
             draggable="true" (dragstart)="drag($event)">
-            <div class="card-header cardbg" style="font-size: 12px; font-family: Geneva, Tahoma, sans-serif; height:100%;padding-top: 4px;  padding-right: 1px; min-height: 40px;">
+            <div class="card-header cardbg" style="font-size: 12px; font-family: Geneva, Tahoma, sans-serif; height:100%;padding-top: 4px; padding-left: 4px; padding-bottom: 0px;  padding-right: 3px; min-height: 40px;">
               {{ card.Title }}
+              <hr style="margin: 2px;">
+              <div style="height:20px; margin:-2px;">
+                <div style="font-size: 12px; font-family:Tahoma, Geneva, Verdana, sans-serif; float:left; margin-left: 6px; margin-top: 8px; font-style: italic; font-weight: bold; ">{{card.DueDate
+                  }} </div>
+                <div class="ecbManu">
+                  <fa-icon class="dropbtn fa-2x" [icon]="faEllipsisH" [matMenuTriggerFor]="ecb"></fa-icon>
+                  <mat-menu #ecb="matMenu">
+                    <button attr.id="UpdateID{{ card.CardID }}" mat-menu-item (click)="event_UpdateCard($event)">
+                      Details...
+                    </button>
+                    <button mat-menu-item [matMenuTriggerFor]="vertebrates">
+                      Severity
+                    </button>
+                    <button attr.id="DeleteID{{ card.CardID }}" mat-menu-item (click)="event_deleteCard($event)">
+                      Delete
+                    </button>
+                  </mat-menu>
+                  <mat-menu #vertebrates="matMenu">
+                    <button attr.id="ColorID{{ card.CardID }}" title="Red" mat-menu-item (click)="event_changeCardSeverity($event)">
+                      Red
+                    </button>
+                    <button attr.id="ColorID{{ card.CardID }}" title="Green" mat-menu-item (click)="event_changeCardSeverity($event)">
+                      Green
+                    </button>
+                  </mat-menu>
+                </div>
+
+              </div>
+
             </div>
           </div>
-          <div class="ecbManu">
+          <!-- <div class="ecbManu">
             <fa-icon class="dropbtn fa-2x" [icon]="faEllipsisV" [matMenuTriggerFor]="ecb"></fa-icon>
-
             <mat-menu #ecb="matMenu">
               <button attr.id="UpdateID{{ card.CardID }}" mat-menu-item (click)="event_UpdateCard($event)">
                 Details...
@@ -100,7 +128,7 @@
                 Green
               </button>
             </mat-menu>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

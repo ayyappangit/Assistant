@@ -4,8 +4,11 @@ import { NgForm } from "@angular/forms";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, audit } from "rxjs/operators";
 import { ToastrService } from "ngx-toastr";
+
+
 import {
   faEllipsisV,
+  faEllipsisH,
   faPlus,
   faGlobe,
   faUserPlus,
@@ -63,7 +66,8 @@ export class HomeLoadComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private httpClient: HttpClient
   ) { }
 
   httpOptions = {
@@ -78,9 +82,10 @@ export class HomeLoadComponent implements OnInit {
   getUserInfo: any;
   g_currUserName: any;
   g_currUserEmail: any;
-  rootURL = "https://infiniteassistantnode.azurewebsites.net/assistant/";
+  rootURL = "";// "http://localhost:3000/assistant/"; //"https://infiniteassistantnode.azurewebsites.net/assistant/"; // 
 
   faEllipsisV = faEllipsisV;
+  faEllipsisH = faEllipsisH;
   faGlobe = faGlobe;
   faPlus = faPlus;
   faUserPlus = faUserPlus;
@@ -169,6 +174,10 @@ export class HomeLoadComponent implements OnInit {
   //#endregion
 
   ngOnInit() {
+    if (window.location.origin.toString().indexOf('localhost') >= 0)
+      this.rootURL = "http://localhost:3000/assistant/";
+    else if (window.location.origin.toString().indexOf('infiniteassistantnode') >= 0)
+      this.rootURL = "https://infiniteassistantnode.azurewebsites.net/assistant/";
     this.getUser();
   }
 
@@ -235,6 +244,7 @@ export class HomeLoadComponent implements OnInit {
   getListCard() {
     this.getListCardService().subscribe(getListsCardsdata => {
       this.getListsCardsdata = getListsCardsdata;
+      // console.log(this.getListsCardsdata);
       //Get Unique List from List array
       this.getUniqueCards = [];
       const map = new Map();
@@ -245,6 +255,9 @@ export class HomeLoadComponent implements OnInit {
             ListID: item.ListID,
             ListName: item.ListName
           });
+        }
+        if (!map.has(item.DueDate)) {
+          item.DueDate = item.DueDate.substring(0, 10);
         }
       }
       if (this.getUniqueCards.length !== 0) {

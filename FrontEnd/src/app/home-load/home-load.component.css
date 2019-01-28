@@ -89,12 +89,27 @@
   margin-bottom: -2px;
 }
 
+.minwidth {
+  min-width: 70px;
+  min-height: 38px;
+  overflow: hidden;
+}
+
+#circle {
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 25px;
+  border-radius: 50%;
+  background-color: #3c5a99;
+}
+
 .ecbManu {
-  position: absolute;
   overflow: visible;
   display: inline-block;
   color: rgb(224, 154, 3);
-  margin-left: 3px;
+  margin-right: 3px;
+  float: right;
 }
 
 /* Start: Todo Create Form */
