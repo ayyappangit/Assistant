@@ -38,14 +38,14 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse goldbg navbar-light" id="navbarNav" style="text-align: left; padding-left: 5px; z-index: 100">
-          <ul class="navbar-nav goldbg" *ngFor="let item of getBoardsNav">
+          <ul class="navbar-nav goldbg minwidth" *ngFor="let item of getBoardsNav">
             <li id="LI{{ item.BoardID }}" class="nav-item">
-              <a attr.id="B{{ item.BoardID }}" (click)="event_onBoardChange($event)" class="nav-link menu minwidth"
-                href="#" style="font-weight: bold;">{{ item.BoardName }}
+              <a attr.id="B{{ item.BoardID }}" (click)="event_onBoardChange($event)" class="nav-link menu " href="#"
+                style="font-weight: bold;">{{ item.BoardName }}
               </a>
             </li>
           </ul>
-          <div style="float: right;">
+          <div style="float: left; width: 30px;">
             <a ref="#" (click)="click_openDialogCreateBoard()">
               <fa-icon class="fas fa-plus " size="lg" [icon]="faPlus" pull="right"></fa-icon>
             </a>
@@ -55,15 +55,21 @@
       <div style="
                   font-style: italic; float:right; margin-top: -29px; position:relative; font-size: 12px;font-weight:
                   bold;z-index: 100; margin-right:5px;">
-        <a ref="#" (click)="click_openDialogDialogChart()">
-          <fa-icon class="fa fa-chart-pie" size="lg" [icon]="faChartPie" pull="left"></fa-icon>
-        </a>
-        <a ref="#" (click)="click_openDialogAddUserToTeam()">
-          <fa-icon class="fa fa-user-plus" size="lg" [icon]="faUserPlus" pull="left"></fa-icon>
-        </a>
-        <span id="currUser" title="{{ g_currUserEmail }}">{{
-          g_currUserName
-          }}</span>
+        <div style="float:left;width: 30px;">
+          <a ref="#" (click)="click_openDialogDialogChart()">
+            <fa-icon class="fa fa-chart-pie" size="lg" [icon]="faChartPie" pull="left"></fa-icon>
+          </a>
+        </div>
+        <div style="float:left;width: 30px;">
+          <a ref="#" (click)="click_openDialogAddUserToTeam()">
+            <fa-icon class="fa fa-user-plus" size="lg" [icon]="faUserPlus" pull="left"></fa-icon>
+          </a>
+        </div>
+        <div style="float:left;width: 100px; font-size: 9.5px;">
+          <span id="currUser" title="{{ g_currUserEmail }}">{{
+            g_currUserName
+            }}</span>
+        </div>
       </div>
     </div>
   </div>
