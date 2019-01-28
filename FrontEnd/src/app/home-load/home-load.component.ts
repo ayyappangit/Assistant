@@ -278,10 +278,15 @@ export class HomeLoadComponent implements OnInit {
   }
 
   event_GetDueDateCSS(duedate: Date) {
-    let css = 'Green';
+    let css = 'Red';
     var todayDate = new Date();
-    if (duedate < todayDate) {
-      css = 'Red';
+    todayDate.setHours(12, 0, 0, 0);
+
+    todayDate.setHours(12, 0, 0, 0);
+    duedate.setHours(12, 0, 0, 0);
+    duedate.setDate(duedate.getDate() + 1); // Todo need to change the code to get utc time to calulate
+    if (duedate >= todayDate) {
+      css = 'Green';
     }
     return css;
   }
