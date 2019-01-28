@@ -174,10 +174,10 @@ export class HomeLoadComponent implements OnInit {
   //#endregion
 
   ngOnInit() {
-    if (window.location.origin.toString().indexOf('localhost') >= 0)
-      this.rootURL = "http://localhost:3000/assistant/";
-    else if (window.location.origin.toString().indexOf('infiniteassistantnode') >= 0)
-      this.rootURL = "https://infiniteassistantnode.azurewebsites.net/assistant/";
+    //if (window.location.origin.toString().indexOf('localhost') >= 0)
+    //this.rootURL = "http://localhost:3000/assistant/";
+    //else if (window.location.origin.toString().indexOf('infiniteassistantnode') >= 0)
+    this.rootURL = "https://infiniteassistantnode.azurewebsites.net/assistant/";
     this.getUser();
   }
 
