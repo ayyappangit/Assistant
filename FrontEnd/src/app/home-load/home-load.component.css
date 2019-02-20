@@ -5,8 +5,9 @@
 .goldbg {
   /* background-color: #ff851b; */
   /* background-image: linear-gradient(white, red); */
-  background-image: linear-gradient(to bottom right, #b10000, #ff3d3d);
-  /* background-image: linear-gradient(to botton right, red, white); */
+  /* background-image: linear-gradient(to bottom right, #b10000, #ff3d3d); */
+  background-image: linear-gradient(to bottom right, gold, gold)
+    /* background-image: linear-gradient(to botton right, red, white); */
 }
 
 .boderrightdanger {
