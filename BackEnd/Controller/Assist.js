@@ -360,6 +360,51 @@ router.put("/ucardseverity", (req, res) => {
     });
 });
 
+//Change Card Title
+router.put("/ucardTitle", (req, res) => {
+  const _cardID = req.body.CardID;
+  const _cardTitle = req.body.Title;
+  conn
+    .connect()
+    .then(function () {
+      const sprocedure = new sql.Transaction(conn);
+      sprocedure
+        .begin()
+        .then(function () {
+          const request = new sql.Request(sprocedure);
+          request.input("CardID", sql.Int, _cardID);
+          request.input("Title", sql.VarChar(200), _cardTitle);
+          request
+            .execute("Card_Title_Update")
+            .then(function () {
+              sprocedure
+                .commit()
+                .then(function (recordSet) {
+                  conn.close();
+                  var jsonRes = '{"status":200}';
+                  res.status(200).send(JSON.stringify(jsonRes));
+                })
+                .catch(function (err) {
+                  conn.close();
+                  res.status(400).send(err);
+                });
+            })
+            .catch(function (err) {
+              conn.close();
+              res.status(400).send(err);
+            });
+        })
+        .catch(function (err) {
+          conn.close();
+          res.status(400).send(err);
+        });
+    })
+    .catch(function (err) {
+      conn.close();
+      res.status(400).send(err);
+    });
+});
+
 //#endregion
 
 //#region Post

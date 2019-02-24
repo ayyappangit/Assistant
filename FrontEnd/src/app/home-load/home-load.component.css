@@ -2,11 +2,19 @@
   color: #3c5a99;
 }
 
+.hideItem {
+  display: none;
+}
+
+.showItem {
+  display: block;
+}
+
 .goldbg {
   /* background-color: #ff851b; */
   /* background-image: linear-gradient(white, red); */
   /* background-image: linear-gradient(to bottom right, #b10000, #ff3d3d); */
-  background-image: linear-gradient(to bottom right, gold, gold)
+  background-image: linear-gradient(to bottom right, gold, rgb(245, 215, 48))
     /* background-image: linear-gradient(to botton right, red, white); */
 }
 
@@ -23,7 +31,7 @@
 }
 
 .cardbg {
-  background-image: linear-gradient(to top right, #fffefe, #ffff88);
+  background-image: linear-gradient(to top right, #fffefe, #b7b799);
 }
 
 .menu {
@@ -52,7 +60,7 @@
   margin: 3px 3px 3px 3px;
   border-radius: 4px;
   padding: 3px 3px 3px 3px;
-  width: 308px;
+  width: 304px;
 }
 
 /* Start: Todo Header */
@@ -67,7 +75,7 @@
 
 /* Start: Todo list Container */
 .todo-list {
-  border: solid 1px #b3b3b3;
+  /* border: solid 1px #b3b3b3; */
   min-height: 60px;
   background-color: ghostwhite;
   border-radius: 4px;
@@ -76,9 +84,14 @@
   width: 100%;
 }
 
+.todo-card {
+  width: 306px;
+  margin: 2px 2px 2px 2px;
+}
+
 /* Start: Todo box - Box */
 .todo-box {
-  padding: 2px 2px 0px 2px;
+  /* padding: 2px 2px 0px 2px; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -129,9 +142,46 @@ h3 {
   letter-spacing: 0.5mm;
 }
 
-@media only screen and (max-width: 400px) {
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: transparent;
+  z-index: -1;
+}
+
+@media only screen and (max-width: 634px) {
   #currUser {
     display: none;
+  }
+
+  .todo-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 2px 1px 2px;
+    display: inline-block;
+    vertical-align: top;
+    height: auto;
+  }
+
+  .todo-box {
+    /* padding: 2px 2px 0px 2px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: -2px;
+  }
+
+  .todo-card {
+    width: 100%;
+    margin: 2px 2px 2px 2px;
   }
 }
 

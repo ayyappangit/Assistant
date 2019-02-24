@@ -1,9 +1,9 @@
 import { AddCardComponent } from './../cards/add-card/add-card.component';
 import { Component, OnInit, Inject } from "@angular/core";
-import { NgForm } from "@angular/forms";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, audit } from "rxjs/operators";
 import { ToastrService } from "ngx-toastr";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 import {
@@ -16,6 +16,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { AstMemoryEfficientTransformer } from '@angular/compiler';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 // #region Interface
 
@@ -137,6 +139,11 @@ export class HomeLoadComponent implements OnInit {
   getUniqueCards: any;
 
   statuses: any[];
+
+  // Change Card Title
+  jsonChangeTitle: any;
+  putCardTitleRes: any;
+
   // Update Severity
   jsonChangeSeverity: any;
   putSeverityRes: any;
@@ -170,9 +177,12 @@ export class HomeLoadComponent implements OnInit {
   deleteCardURL: any;
   deleteCardRes: any;
 
+  ProgressBar: any;
+
   //#endregion
 
   ngOnInit() {
+    this.ProgressBar = "query";
     //if (window.location.origin.toString().indexOf('localhost') >= 0)
     //this.rootURL = "http://localhost:3000/assistant/";
     //else if (window.location.origin.toString().indexOf('infiniteassistantnode') >= 0)
@@ -265,7 +275,9 @@ export class HomeLoadComponent implements OnInit {
           "hcurrentListID"
         ).title = this.getUniqueCards[0].ListID;
       }
+      this.ProgressBar = "";
     });
+
   }
   getListCardService() {
     var _url = this.rootURL + "listscards/" + this.g_CurrentBoardID;
@@ -279,17 +291,18 @@ export class HomeLoadComponent implements OnInit {
   }
 
   event_GetDueDateCSS(duedate: Date) {
-    let css = 'Red';
-    var todayDate = new Date();
-    todayDate.setHours(12, 0, 0, 0);
+    let css = 'Green';
+    // var todayDate = new Date();
+    // todayDate.setHours(12, 0, 0, 0);
 
-    todayDate.setHours(12, 0, 0, 0);
-    duedate.setHours(12, 0, 0, 0);
-    duedate.setDate(duedate.getDate() + 1); // Todo need to change the code to get utc time to calulate
-    if (duedate >= todayDate) {
-      css = 'Green';
-    }
+    // todayDate.setHours(12, 0, 0, 0);
+    // duedate.setHours(12, 0, 0, 0);
+    // duedate.setDate(duedate.getDate() + 1); // Todo need to change the code to get utc time to calulate
+    // if (duedate >= todayDate) {
+    //   css = 'Green';
+    // }
     return css;
+
   }
 
   //#endregion
@@ -326,6 +339,7 @@ export class HomeLoadComponent implements OnInit {
   //#region  Events
 
   event_onTeamChange(event) {
+    this.ProgressBar = "query";
     const target = event.target || event.srcElement || event.currentTarget;
     let teamID = target.attributes.id.nodeValue;
     teamID = teamID.replace("T", "");
@@ -336,6 +350,7 @@ export class HomeLoadComponent implements OnInit {
   }
 
   event_onBoardChange(event) {
+    this.ProgressBar = "query";
     const target = event.target || event.srcElement || event.currentTarget;
     let boardID = target.attributes.id.nodeValue;
     boardID = boardID.replace("B", "");
@@ -552,6 +567,48 @@ export class HomeLoadComponent implements OnInit {
 
   //#endregion
 
+  //#region Update Card
+  event_doubleClickCardTitle(CardID: string) {
+    var viewcardText = document.getElementById("cardviewmode" + CardID);
+    var editcardText = document.getElementById("cardeditmode" + CardID);
+    viewcardText.className = "hideItem";
+    editcardText.className = "showItem";
+    document.getElementById("cardeditmode" + CardID).focus();
+  }
+  event_blurEditCard(CardID: string) {
+    var viewcardText = document.getElementById("cardviewmode" + CardID);
+    var editcardText = document.getElementById("cardeditmode" + CardID);
+    viewcardText.className = "showItem";
+    editcardText.className = "hideItem";
+    var newcardName = editcardText.nodeValue;
+    if (newcardName.length > 0) {
+      this.jsonChangeTitle = {
+        CardID: CardID,
+        Severity: newcardName
+      };
+      this.putUpdateCardTitle();
+    }
+  }
+
+  putUpdateCardTitle(): void {
+    this.serviceputUpdateCardTitle().subscribe(putCardTitleRes => {
+      this.putCardTitleRes = putCardTitleRes;
+      const res = JSON.parse(this.putCardTitleRes);
+      if (res.status === 200) {
+        this.getListCard();
+        this.toastr.success("Card Updated!!");
+      }
+    });
+  }
+  serviceputUpdateCardTitle() {
+    var _url = this.rootURL + "ucardTitle";
+    return this.http.put(
+      _url,
+      JSON.stringify(this.jsonChangeTitle),
+      this.httpOptions
+    );
+  }
+  //#endregion
   //#region Create Card
 
   onCardCreated(formData: { title: string }) {
@@ -651,6 +708,7 @@ export class HomeLoadComponent implements OnInit {
     };
     this.putUpdateSeverity();
   }
+
 
   putUpdateSeverity(): void {
     this.serviceUpdateSeverity().subscribe(putSeverityRes => {

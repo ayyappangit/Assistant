@@ -30,22 +30,23 @@
           </button>
         </div>
       </div> -->
+
     </div>
     <div id="topnavBoardID" class="topnavBoard">
       <nav class="navbar navbar-expand-lg navbar-light goldbg" style=" height: 39px; padding-left: 0px;">
         <button class="navbar-toggler navbar-dark goldbg" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-top: -1px; margin-left: 0px; height:39px;">
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-top: -7px; margin-left: 0px; height:39px;">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse goldbg navbar-light" id="navbarNav" style="text-align: left; padding-left: 5px; z-index: 100">
           <ul class="navbar-nav goldbg minwidth" *ngFor="let item of getBoardsNav">
-            <li id="LI{{ item.BoardID }}" class="nav-item">
+            <li id="LI{{ item.BoardID }}" class="nav-item" style="width:100%; text-align:center;">
               <a attr.id="B{{ item.BoardID }}" (click)="event_onBoardChange($event)" class="nav-link menu " href="#"
-                style="font-weight: bold;">{{ item.BoardName }}
+                style="font-weight: bold; font-size: 13px;">{{ item.BoardName }}
               </a>
             </li>
           </ul>
-          <div style="float: left; width: 30px;">
+          <div style="float: left;">
             <a ref="#" (click)="click_openDialogCreateBoard()">
               <fa-icon class="fas fa-plus " size="lg" [icon]="faPlus" pull="right"></fa-icon>
             </a>
@@ -73,15 +74,18 @@
       </div>
     </div>
   </div>
+  <mat-progress-bar [mode]="ProgressBar"></mat-progress-bar>
   <div class="left">
     <div *ngFor="let list of getUniqueCards" class="todo-container">
       <h3>{{ list.ListName }}</h3>
       <div (dragover)="allowDrop($event)" (drop)="drop($event, list.ListID)" class="todo-list">
         <div id="L{{ list.ListID }}" class="todo-box" *ngFor="let card of event_getAllCardNew(list.ListID)">
-          <div id="C{{ card.CardID }}" class="card boderright{{ card.Severity }} mb-1" style="width: 306px; margin: 2px 2px 2px 2px;"
-            draggable="true" (dragstart)="drag($event)">
-            <div class="card-header cardbg" style="font-size: 12px; font-family: Geneva, Tahoma, sans-serif; height:100%;padding-top: 4px; padding-left: 4px; padding-bottom: 0px;  padding-right: 3px; min-height: 40px;">
-              {{ card.Title }}
+          <div id="C{{ card.CardID }}" class="card todo-card boderright{{ card.Severity }} mb-1" draggable="true"
+            (dragstart)="drag($event)">
+            <div class="card-header cardbg" (dblclick)="event_doubleClickCardTitle(card.CardID);" style="font-size: 12px; font-family: Geneva, Tahoma, sans-serif; height:100%;padding-top: 4px; padding-left: 4px; padding-bottom: 0px;  padding-right: 3px; min-height: 40px;">
+              <span id="cardviewmode{{card.CardID}}">{{ card.Title }}</span>
+              <textarea class="hideItem" (keyup.enter)="event_blurEditCard(card.CardID);" (blur)="event_blurEditCard(card.CardID);"
+                id="cardeditmode{{card.CardID}}" name="message" style="min-width:100%; min-height:60px;">{{ card.Title }}</textarea>
               <hr style="margin: 2px;">
               <div style="height:20px; margin:-2px;">
                 <div class="dueDateColor{{event_GetDueDateCSS(card.DueDate, card.CardID)}}" style="font-size: 10px; font-family:Tahoma, Geneva, Verdana, sans-serif; float:left; margin-left: 6px; margin-top: 8px; font-style: italic; font-weight: bold; ">{{card.DueDate
@@ -110,9 +114,7 @@
                     </button>
                   </mat-menu>
                 </div>
-
               </div>
-
             </div>
           </div>
           <!-- <div class="ecbManu">
