@@ -70,6 +70,7 @@ export class HomeLoadComponent implements OnInit {
     private httpClient: HttpClient
   ) { }
 
+  editCardTextValue: string;
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json"
@@ -252,7 +253,6 @@ export class HomeLoadComponent implements OnInit {
   getListCard() {
     this.getListCardService().subscribe(getListsCardsdata => {
       this.getListsCardsdata = getListsCardsdata;
-      // console.log(this.getListsCardsdata);
       //Get Unique List from List array
       this.getUniqueCards = [];
       const map = new Map();
@@ -567,32 +567,50 @@ export class HomeLoadComponent implements OnInit {
   //#endregion
 
   //#region Update Card
-  event_doubleClickCardTitle(CardID: string) {
-    var viewcardText = document.getElementById("cardviewmode" + CardID);
-    var editcardText = document.getElementById("cardeditmode" + CardID);
+  event_doubleClickCardTitle(card) {
+    var viewcardText = document.getElementById("cardviewmode" + card.CardID);
+    var editcardText = document.getElementById("cardeditmode" + card.CardID);
+    this.editCardTextValue = viewcardText.innerText;
+    console.log(this.editCardTextValue);
     viewcardText.className = "hideItem";
     editcardText.className = "showItem";
-    document.getElementById("cardeditmode" + CardID).focus();
+    document.getElementById("cardeditmode" + card.CardID).focus();
+
   }
-  event_blurEditCard(CardID: string) {
-    const viewcardText = document.getElementById("cardviewmode" + CardID);
-    const editcardText = document.getElementById("cardeditmode" + CardID);
+  // event_enterEditCard(card) {
+  //   const viewcardText = document.getElementById("cardviewmode" + card.CardID);
+  //   const editcardText = document.getElementById("cardeditmode" + card.CardID);
+  //   viewcardText.className = "showItem";
+  //   editcardText.className = "hideItem";
+  //   this.jsonChangeTitle = {
+  //     CardID: card.CardID,
+  //     Title: this.editCardTextValue
+  //   };
+  //   this.putUpdateCardTitle();
+  //   console.log(this.editCardTextValue);
+  // }
+
+  event_blurEditCard(event) {
+    const target = event.target || event.srcElement || event.currentTarget;
+    var _cardID = target.attributes.id.nodeValue;
+    _cardID = _cardID.replace("cardeditmode", "");
+    const viewcardText = document.getElementById("cardviewmode" + _cardID);
+    const editcardText = document.getElementById("cardeditmode" + _cardID);
     viewcardText.className = "showItem";
     editcardText.className = "hideItem";
-    let newcardName = editcardText.innerText;
     this.jsonChangeTitle = {
-      CardID: CardID,
-      Title: newcardName
+      CardID: _cardID,
+      Title: this.editCardTextValue
     };
+    console.log(this.editCardTextValue);
+    this.editCardTextValue = ""
     this.putUpdateCardTitle();
   }
 
   putUpdateCardTitle(): void {
     this.serviceputUpdateCardTitle().subscribe(putCardTitleRes => {
-      console.log(putCardTitleRes);
       this.putCardTitleRes = putCardTitleRes;
       const res = JSON.parse(this.putCardTitleRes);
-      console.log(res);
       if (res.status === 200) {
         this.getListCard();
         this.toastr.success("Card Updated!!");
@@ -848,12 +866,12 @@ export class DialogPieChart {
 
   // events on slice click
   public chartClicked(e: any): void {
-    console.log(e);
+    // console.log(e);
   }
 
   // event on pie chart slice hover
   public chartHovered(e: any): void {
-    console.log(e);
+    // console.log(e);
   }
 }
 
