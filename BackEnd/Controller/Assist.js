@@ -289,8 +289,8 @@ router.put("/ucardstatus", (req, res) => {
               sprocedure
                 .commit()
                 .then(function (recordSet) {
-
                   conn.close();
+                  console.log('g')
                   var jsonRes = '{"status":200}';
                   res.status(200).send(JSON.stringify(jsonRes));
                 })

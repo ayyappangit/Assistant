@@ -3,8 +3,6 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map, audit } from "rxjs/operators";
 import { ToastrService } from "ngx-toastr";
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-
 
 import {
   faEllipsisV,
@@ -84,6 +82,7 @@ export class HomeLoadComponent implements OnInit {
   getUserInfo: any;
   g_currUserName: any;
   g_currUserEmail: any;
+  //rootURL = "http://localhost:3000/assistant/";
   rootURL = "https://infiniteassistantnode.azurewebsites.net/assistant/";
   faEllipsisV = faEllipsisV;
   faEllipsisH = faEllipsisH;
@@ -576,24 +575,24 @@ export class HomeLoadComponent implements OnInit {
     document.getElementById("cardeditmode" + CardID).focus();
   }
   event_blurEditCard(CardID: string) {
-    var viewcardText = document.getElementById("cardviewmode" + CardID);
-    var editcardText = document.getElementById("cardeditmode" + CardID);
+    const viewcardText = document.getElementById("cardviewmode" + CardID);
+    const editcardText = document.getElementById("cardeditmode" + CardID);
     viewcardText.className = "showItem";
     editcardText.className = "hideItem";
-    var newcardName = editcardText.nodeValue;
-    if (newcardName.length > 0) {
-      this.jsonChangeTitle = {
-        CardID: CardID,
-        Severity: newcardName
-      };
-      this.putUpdateCardTitle();
-    }
+    let newcardName = editcardText.innerText;
+    this.jsonChangeTitle = {
+      CardID: CardID,
+      Title: newcardName
+    };
+    this.putUpdateCardTitle();
   }
 
   putUpdateCardTitle(): void {
     this.serviceputUpdateCardTitle().subscribe(putCardTitleRes => {
+      console.log(putCardTitleRes);
       this.putCardTitleRes = putCardTitleRes;
       const res = JSON.parse(this.putCardTitleRes);
+      console.log(res);
       if (res.status === 200) {
         this.getListCard();
         this.toastr.success("Card Updated!!");
@@ -602,13 +601,10 @@ export class HomeLoadComponent implements OnInit {
   }
   serviceputUpdateCardTitle() {
     var _url = this.rootURL + "ucardTitle";
-    return this.http.put(
-      _url,
-      JSON.stringify(this.jsonChangeTitle),
-      this.httpOptions
-    );
+    return this.http.put(_url, JSON.stringify(this.jsonChangeTitle), this.httpOptions);
   }
   //#endregion
+
   //#region Create Card
 
   onCardCreated(formData: { title: string }) {
