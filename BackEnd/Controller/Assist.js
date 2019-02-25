@@ -406,7 +406,7 @@ router.put("/ucardTitle", (req, res) => {
 });
 
 //Update Card Details
-router.put("/ucardTitle", (req, res) => {
+router.put("/ucarddetails", (req, res) => {
   const _cardID = req.body.ID;
   const _cardTitle = req.body.Title;
   const _cardDetails = req.body.Details;
