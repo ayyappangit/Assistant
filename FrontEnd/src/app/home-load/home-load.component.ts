@@ -176,6 +176,12 @@ export class HomeLoadComponent implements OnInit {
   jsonUpdateCard: any;
   putCardRes: any;
 
+
+  //Update card Details
+
+  jsonUpdateDetailsCard: any;
+  putCardDetailsRes: any;
+
   // Delete ToDo
 
   jsonDeleteCard: any;
@@ -681,17 +687,32 @@ export class HomeLoadComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.dialogListName = result;
       if (result != undefined) {
-        this.jsonUpdateCard = {
+        this.jsonUpdateDetailsCard = {
           ID: id,
           Title: result.cu_Title,
           Details: result.cu_Details,
           DueDate: result.cu_DueDate,
           Sequence: result.cu_Sequence
         };
-        console.log(this.jsonUpdateCard);
-        //sthis.createList();
+        console.log(this.jsonUpdateDetailsCard);
+        this.updateCardDetails();
       }
     });
+  }
+
+  updateCardDetails(): void {
+    this.serviceupdateCard().subscribe(putCardDetailsRes => {
+      this.putCardDetailsRes = putCardDetailsRes;
+      const res = JSON.parse(this.putCardDetailsRes);
+      if (res.status === 200) {
+        this.getListCard();
+        this.toastr.success("Card Updated!!");
+      }
+    });
+  }
+  serviceupdateCard() {
+    var url = this.rootURL + "ucarddetails";
+    return this.http.put(url, JSON.stringify(this.jsonUpdateDetailsCard), this.httpOptions);
   }
   //#endregion
 
