@@ -613,7 +613,7 @@ export class HomeLoadComponent implements OnInit {
       const res = JSON.parse(this.putCardTitleRes);
       if (res.status === 200) {
         this.getListCard();
-        this.toastr.success("Card Updated!!");
+        // this.toastr.success("Card Updated!!");
       }
     });
   }

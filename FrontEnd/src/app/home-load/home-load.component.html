@@ -85,7 +85,7 @@
             <div class="card-header cardbg" (dblclick)="event_doubleClickCardTitle(card);" style="font-size: 12px; font-family: Geneva, Tahoma, sans-serif; height:100%;padding-top: 4px; padding-left: 4px; padding-bottom: 0px;  padding-right: 3px; min-height: 40px;">
               <span class="showItem" id="cardviewmode{{card.CardID}}">{{ card.Title }}</span>
               <textarea class="hideItem" (blur)="event_blurEditCard($event);" id="cardeditmode{{card.CardID}}" name="message"
-                style="min-width:100%; min-height:60px;">{{ editCardTextValue }}</textarea>
+                style="min-width:100%; min-height:60px; border-style: none; border-color: Transparent; overflow: auto;">{{ editCardTextValue }}</textarea>
               <hr style="margin: 2px;">
               <div style="height:20px; margin:-2px;">
                 <div class="dueDateColor{{event_GetDueDateCSS(card.DueDate, card.CardID)}}" style="font-size: 10px; font-family:Tahoma, Geneva, Verdana, sans-serif; float:left; margin-left: 6px; margin-top: 8px; font-style: italic; font-weight: bold; ">{{card.DueDate
