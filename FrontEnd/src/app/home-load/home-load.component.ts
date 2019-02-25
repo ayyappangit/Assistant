@@ -171,6 +171,11 @@ export class HomeLoadComponent implements OnInit {
   jsonCreateCard: any;
   postCardRes: any;
 
+  //Update card
+
+  jsonUpdateCard: any;
+  putCardRes: any;
+
   // Delete ToDo
 
   jsonDeleteCard: any;
@@ -676,6 +681,14 @@ export class HomeLoadComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.dialogListName = result;
       if (result != undefined) {
+        this.jsonUpdateCard = {
+          ID: id,
+          Title: result.cu_Title,
+          Details: result.cu_Details,
+          DueDate: result.cu_DueDate,
+          Sequence: result.cu_Sequence
+        };
+        console.log(this.jsonUpdateCard);
         //sthis.createList();
       }
     });

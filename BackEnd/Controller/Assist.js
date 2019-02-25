@@ -360,7 +360,7 @@ router.put("/ucardseverity", (req, res) => {
     });
 });
 
-//Change Card Title
+//Update Card Name
 router.put("/ucardTitle", (req, res) => {
   const _cardID = req.body.CardID;
   const _cardTitle = req.body.Title;
@@ -376,6 +376,57 @@ router.put("/ucardTitle", (req, res) => {
           request.input("Title", sql.VarChar(200), _cardTitle);
           request
             .execute("Card_Title_Update")
+            .then(function () {
+              sprocedure
+                .commit()
+                .then(function (recordSet) {
+                  conn.close();
+                  var jsonRes = '{"status":200}';
+                  res.status(200).send(JSON.stringify(jsonRes));
+                })
+                .catch(function (err) {
+                  conn.close();
+                  res.status(400).send(err);
+                });
+            })
+            .catch(function (err) {
+              conn.close();
+              res.status(400).send(err);
+            });
+        })
+        .catch(function (err) {
+          conn.close();
+          res.status(400).send(err);
+        });
+    })
+    .catch(function (err) {
+      conn.close();
+      res.status(400).send(err);
+    });
+});
+
+//Update Card Details
+router.put("/ucardTitle", (req, res) => {
+  const _cardID = req.body.ID;
+  const _cardTitle = req.body.Title;
+  const _cardDetails = req.body.Details;
+  const _cardDueDate = req.body.DueDate;
+  const _cardSequence = req.body.Sequence;
+  conn
+    .connect()
+    .then(function () {
+      const sprocedure = new sql.Transaction(conn);
+      sprocedure
+        .begin()
+        .then(function () {
+          const request = new sql.Request(sprocedure);
+          request.input("CardID", sql.Int, _cardID);
+          request.input("Title", sql.VarChar(200), _cardTitle);
+          request.input("Details", sql.VarChar(500), _cardDetails);
+          request.input("DueDate", sql.Date, _cardDueDate)
+          request.input("Sequence", sql.Int, _cardSequence);
+          request
+            .execute("Card_Update")
             .then(function () {
               sprocedure
                 .commit()
