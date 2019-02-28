@@ -49,7 +49,7 @@ import { AddCardComponent } from "./cards/add-card/add-card.component";
     MatTabsModule,
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: "toast-bottom-right",
+      positionClass: "toast-top-right",
       preventDuplicates: true
     }) // ToastrModule added
   ],

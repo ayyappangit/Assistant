@@ -1,20 +1,21 @@
-<div class="main">
+<div>
   <input type="hidden" id="hcurrentTeamID" />
   <input type="hidden" id="hcurrentBoardID" />
   <input type="hidden" id="hcurrentListID" />
-  <div class="headerGroup">
+  <div>
     <div class="btn-group mr-3">
       <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-        <button class="btn btn-outline-blue blacktext goldbg" ngbDropdownToggle style="width: 175px; border: 0px; border-radius: 0px; text-align:right; font-size: 11px; height: 39px;font-weight: bold;">
-          <fa-icon class="fas fa-tasks" size="lg" [spin]="true" [icon]="faGlobe" pull="left" style="float:left; width:16px;"></fa-icon>
+        <button class="btn btn-outline-blue fontcolorblack bgcolortheme menucurrteambutton" ngbDropdownToggle>
+          <fa-icon class="fas fa-tasks currentteamnameicon" size="lg" [spin]="true" [icon]="faGlobe" pull="left"></fa-icon>
           {{ g_CurrentTeamName }}
         </button>
-        <div class="dropdown-menu goldbg" ngbDropdownMenu>
-          <button class="dropdown-item goldbg" *ngFor="let item of getTeamsNav" attr.id="T{{ item.TeamID }}" (click)="event_onTeamChange($event)">
+        <div class="dropdown-menu bgcolortheme" ngbDropdownMenu>
+          <button class="dropdown-item bgcolortheme" *ngFor="let item of getTeamsNav" attr.id="T{{ item.TeamID }}"
+            (click)="event_onTeamChange($event)">
             {{ item.TeamName }}
           </button>
           <div></div>
-          <button class="dropdown-item goldbg" id="addTeam" (click)="click_openDialogCreateTeam()" style="text-align: left;">
+          <button class="dropdown-item bgcolortheme textleftaligh" id="addTeam" (click)="click_openDialogCreateTeam()">
             Add Team <fa-icon class="fas fa-plus " size="lg" [icon]="faPlus" pull="right"></fa-icon>
           </button>
         </div>
@@ -33,44 +34,42 @@
 
     </div>
     <div id="topnavBoardID" class="topnavBoard">
-      <nav class="navbar navbar-expand-lg navbar-light goldbg" style=" height: 39px; padding-left: 0px;">
-        <button class="navbar-toggler navbar-dark goldbg" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-top: -7px; margin-left: 0px; height:39px;">
+      <nav class="navbar navbar-expand-lg navbar-light bgcolortheme topnavbar ">
+        <button class="navbar-toggler navbar-dark bgcolortheme topnavbarbutton" type="button" data-toggle="collapse"
+          data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse goldbg navbar-light" id="navbarNav" style="text-align: left; padding-left: 5px; z-index: 100">
-          <ul class="navbar-nav goldbg minwidth" *ngFor="let item of getBoardsNav">
-            <li id="LI{{ item.BoardID }}" class="nav-item" style="width:100%; text-align:center;">
-              <a attr.id="B{{ item.BoardID }}" (click)="event_onBoardChange($event)" class="nav-link menu " href="#"
-                style="font-weight: bold; font-size: 13px;">{{ item.BoardName }}
+        <div class="collapse navbar-collapse bgcolortheme navbar-light topnavbarcollapse " id="navbarNav">
+          <ul class="navbar-nav bgcolortheme minwidth" *ngFor="let item of getBoardsNav">
+            <li id="LI{{ item.BoardID }}" class="nav-item boardli">
+              <a attr.id="B{{ item.BoardID }}" (click)="event_onBoardChange($event)" class="nav-link menu topnavbarboardname"
+                href="#">{{ item.BoardName }}
               </a>
             </li>
           </ul>
-          <div style="float: left;">
+          <div class="floatleft">
             <a ref="#" (click)="click_openDialogCreateBoard()">
-              <span style="float:left; width:20px;">
+              <span class="addboardicon">
                 <fa-icon class="fas fa-plus " size="md" [icon]="faPlus" pull="right"></fa-icon>
               </span>
-              <span style="width:70px;font-style: italic; float:left; font-size: 12px;font-weight: bold; margin-left:5px;">Add
+              <span class="addboardtext">Add
                 Board</span>
             </a>
           </div>
         </div>
       </nav>
-      <div style="
-                 min-width: 65px; font-style: italic; float:right; margin-top: -29px; position:relative; font-size: 12px;font-weight:
-                  bold;z-index: 100; margin-right:5px;">
-        <div style="float:left;width: 30px;">
+      <div class="divtoprightheader">
+        <div class="divcharticon">
           <a ref="#" (click)="click_openDialogDialogChart()">
             <fa-icon class="fa fa-chart-pie" size="lg" [icon]="faChartPie" pull="left"></fa-icon>
           </a>
         </div>
-        <div style="float:left;width: 30px;">
+        <div class="divaddusericon">
           <a ref="#" (click)="click_openDialogAddUserToTeam()">
             <fa-icon class="fa fa-user-plus" size="lg" [icon]="faUserPlus" pull="left"></fa-icon>
           </a>
         </div>
-        <div style="float:left; font-size: 9px;">
+        <div class="divuserName">
           <span id="currUser" title="{{ g_currUserEmail }}">{{
             g_currUserName
             }}</span>
@@ -84,16 +83,16 @@
       <h3>{{ list.ListName }}</h3>
       <div (dragover)="allowDrop($event)" (drop)="drop($event, list.ListID)" class="todo-list">
         <div id="L{{ list.ListID }}" class="todo-box" *ngFor="let card of event_getAllCardNew(list.ListID)">
-          <div id="C{{ card.CardID }}" class="card todo-card boderright{{ card.Severity }} mb-1" draggable="true"
+          <div id="C{{ card.CardID }}" class=" todo-card card boderright{{ card.Severity }} mb-1" draggable="true"
             (dragstart)="drag($event)">
-            <div class="card-header cardbg" style="font-size: 12px; font-family: Geneva, Tahoma, sans-serif; height:100%;padding-top: 4px; padding-left: 4px; padding-bottom: 0px;  padding-right: 3px; min-height: 40px;">
+            <div class="card-header cardbg cardheader">
               <span class="showItem" (dblclick)="event_doubleClickCardTitle(card);" id="cardviewmode{{card.CardID}}">{{
                 card.Title }}</span>
-              <textarea class="hideItem" (blur)="event_blurEditCard($event);" id="cardeditmode{{card.CardID}}" name="message"
-                style="min-width:100%; min-height:60px; border-style: none; border-color: Transparent; overflow: auto;">{{ editCardTextValue }}</textarea>
-              <hr style="margin: 2px;">
-              <div style="height:20px; margin:-2px;">
-                <div class="dueDateColor{{event_GetDueDateCSS(card.DueDate, card.CardID)}}" style="font-size: 10px; font-family:Tahoma, Geneva, Verdana, sans-serif; float:left; margin-left: 6px; margin-top: 8px; font-style: italic; font-weight: bold; ">{{card.DueDate
+              <textarea class="hideItem cardedittextarea" (blur)="event_blurEditCard($event);" id="cardeditmode{{card.CardID}}"
+                name="message">{{ editCardTextValue }}</textarea>
+              <hr class="hrmargin">
+              <div class="duedatedivmain">
+                <div class="dueDateColor{{event_GetDueDateCSS(card.DueDate, card.CardID)}} duedatediv">{{card.DueDate
                   | date:'MM/dd/yyyy'
                   }} </div>
 
@@ -122,42 +121,19 @@
               </div>
             </div>
           </div>
-          <!-- <div class="ecbManu">
-            <fa-icon class="dropbtn fa-2x" [icon]="faEllipsisV" [matMenuTriggerFor]="ecb"></fa-icon>
-            <mat-menu #ecb="matMenu">
-              <button attr.id="UpdateID{{ card.CardID }}" mat-menu-item (click)="event_UpdateCard($event)">
-                Details...
-              </button>
-              <button mat-menu-item [matMenuTriggerFor]="vertebrates">
-                Severity
-              </button>
-              <button attr.id="DeleteID{{ card.CardID }}" mat-menu-item (click)="event_deleteCard($event)">
-                Delete
-              </button>
-            </mat-menu>
-            <mat-menu #vertebrates="matMenu">
-              <button attr.id="ColorID{{ card.CardID }}" title="Red" mat-menu-item (click)="event_changeCardSeverity($event)">
-                Red
-              </button>
-              <button attr.id="ColorID{{ card.CardID }}" title="Green" mat-menu-item (click)="event_changeCardSeverity($event)">
-                Green
-              </button>
-            </mat-menu>
-          </div> -->
         </div>
       </div>
     </div>
   </div>
-  <div style="margin-top: 5px;float:left; margin-left: -3px;">
-    <a ref="#" (click)="click_openDialogCreateList()">
-      <span style="width:20px; float:left;">
+  <div class="addlist">
+    <a ref=" #" (click)="click_openDialogCreateList()">
+      <span clss="addlisticon">
         <fa-icon class="fas fa-plus " size="md" [icon]="faPlus" pull="right"></fa-icon>
       </span>
-      <span style="width:60px; font-style: italic; float:left; font-size: 12px;font-weight: bold; margin-left:5px;">Add
-        List</span>
+      <span class="addlisttext">Add List</span>
     </a>
   </div>
-  <div id="footerspace" style="float:left; margin-top:-12px;height: 95px;"></div>
+  <div class="footerspace"></div>
   <div class="right">
     <add-card (cardCreated)="onCardCreated($event)"></add-card>
   </div>
