@@ -1,6 +1,6 @@
 <form #formCreateCard="ngForm" (keyup.enter)="onCreateCard(formCreateCard)">
   <div class="form-group" style="margin-bottom:0px;">
-    <textarea style="font-weight: bold; font-style: italic; background-color: black; color:white; font-size: 12px;"
+    <textarea style="font-weight: bold; font-style: italic; background-color: black; border:solid 2px gold; color:white; font-size: 12px;"
       ngModel name="title" id="title" #title="ngModel" cols="100" rows="2" placeholder="Add card details here..." class="form-control"
       maxlength="199"></textarea>
     <!-- <div *ngIf="title.touched && title.invalid" class="alert alert-danger">
